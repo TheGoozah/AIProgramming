@@ -1,0 +1,50 @@
+/*=============================================================================*/
+// Copyright 2017-2018 Elite Engine
+// Authors: Matthieu Delaere
+/*=============================================================================*/
+// EPhysicsTypes.h: Common Physics Types
+/*=============================================================================*/
+#ifndef ELITE_PHYSICS_TYPES
+#define ELITE_PHYSICS_TYPES
+
+//namespace Elite
+//{
+	/*! EForce Mode */
+	enum EForceMode
+	{
+		eForce = 0,
+		eImpulse = 1
+	};
+	/*! ERigidBody Type */
+	enum ERigidBodyType
+	{
+		eStatic = 0,
+		eKinematic = 1,
+		eDynamic = 2
+	};
+	/*!Base template for Transform information for Physics Implementations */
+	template<typename positionType, typename rotationType>
+	struct ETransform
+	{
+		positionType position = {};
+		rotationType rotation = {};
+
+		ETransform(positionType pos, rotationType rot)
+			: position(pos), rotation(rot) {};
+		ETransform() {};
+	};
+	/*!Initialization informtion for RigidBody creation*/
+	struct RigidBodyDefine
+	{
+		float linearDamping = 0.1f;
+		float angularDamping = 0.01f;
+		Elite::ERigidBodyType type = Elite::ERigidBodyType::eKinematic;
+		bool allowSleep = false;
+
+		RigidBodyDefine() {}
+		RigidBodyDefine(float _linearDamping, float _angularDamping, Elite::ERigidBodyType _type, bool _allowSleep)
+			:linearDamping(_linearDamping), angularDamping(_angularDamping), type(_type), allowSleep(_allowSleep)
+		{}
+	};
+//}
+#endif
